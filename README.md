@@ -1,3 +1,7 @@
+
+WASM-HEARTBEAT
+
+
 Terminal 1 - Start Server:(inside the server)
 
 cd server
@@ -11,3 +15,4 @@ Terminal 2 - Run Mock Emulator: (inside mock-emulator)
 
 cd mock-emulator
 python3 heartbeat_emulator.py
+
