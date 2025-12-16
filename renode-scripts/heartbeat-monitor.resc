@@ -1,0 +1,33 @@
+# Renode script for Heartbeat Monitoring System
+
+# Create machine
+mach create "HeartbeatMonitor"
+machine LoadPlatformDescription @../renode-config/gd32vf103.repl
+
+# Load firmware
+sysbus LoadBinary @../firmware.bin 0x0
+
+# Create UART for heartbeat output
+uart: UART.PL011 @ sysbus 0x40013800
+    frequency: 115200
+
+# Connect UART to TCP port for server communication
+connector Connect uart socket-server 3456
+
+# Create virtual timer for simulation
+timer: Timers.TickTimer @ sysbus 0x40000000
+    frequency: 1000000
+
+# Show peripherals
+showAnalyzer uart
+
+# Logging
+logLevel -1
+uart LogToFile "heartbeat.log"
+
+# Start emulation
+start
+
+echo "Heartbeat Monitor System Started!"
+echo "Connect to UART via: telnet localhost 3456"
+echo "Waiting for heartbeat messages..."

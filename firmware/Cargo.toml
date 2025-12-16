@@ -1,0 +1,22 @@
+cd /Users/macbookpro/Desktop/wasm-heartbeat/heartbeat-monitoring/firmware
+
+cat > Cargo.toml << 'EOF'
+[package]
+name = "heartbeat-firmware"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+riscv-rt = "0.11"
+panic-halt = "0.2"
+heapless = "0.8"  # For fixed-size collections
+
+[[bin]]
+name = "heartbeat-firmware"
+target = "riscv32imac-unknown-none-elf"
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+EOF

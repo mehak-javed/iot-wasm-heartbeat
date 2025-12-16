@@ -1,0 +1,2 @@
+gd32vf103: MCU.GD32VF103 @ sysbus
+    cpu: CPU.RiscV32 @ 0
